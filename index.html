@@ -46,6 +46,8 @@
           class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
           required
         />
+        <p id="nameError" class="text-red-500 text-sm mt-1"></p>
+
         <input
           type="email"
           id="donorEmail"
@@ -53,6 +55,8 @@
           class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
           required
         />
+        <p id="emailError" class="text-red-500 text-sm mt-1"></p>
+
         <input
           type="number"
           id="donationAmount"
@@ -61,6 +65,7 @@
           required
           min="1"
         />
+        <p id="amountError" class="text-red-500 text-sm mt-1"></p>
         <button
           type="button"
           onclick="openPaymentModal()"
@@ -190,8 +195,85 @@
       const goalAmount = 10000;
       let leaderboard = [];
 
+      document
+        .getElementById("donorName")
+        .addEventListener("input", function () {
+          let nameError = document.getElementById("nameError");
+          if (this.value.trim() === "") {
+            nameError.textContent = "Name is required.";
+          } else {
+            nameError.textContent = "";
+          }
+        });
+
+      document
+        .getElementById("donorEmail")
+        .addEventListener("input", function () {
+          let emailError = document.getElementById("emailError");
+          if (this.value.trim() === "") {
+            emailError.textContent = "Email is required.";
+          } else if (!/^\S+@\S+\.\S+$/.test(this.value.trim())) {
+            emailError.textContent = "Enter a valid email address.";
+          } else {
+            emailError.textContent = "";
+          }
+        });
+
+      document
+        .getElementById("donationAmount")
+        .addEventListener("input", function () {
+          let amountError = document.getElementById("amountError");
+          let amount = this.value.trim();
+          if (amount === "") {
+            amountError.textContent = "Donation amount is required.";
+          } else if (isNaN(amount) || parseInt(amount) <= 0) {
+            amountError.textContent =
+              "Enter a valid donation amount (greater than 0).";
+          } else {
+            amountError.textContent = "";
+          }
+        });
+
       function openPaymentModal() {
-        document.getElementById("paymentModal").classList.remove("hidden");
+        let name = document.getElementById("donorName").value.trim();
+        let email = document.getElementById("donorEmail").value.trim();
+        let amount = document.getElementById("donationAmount").value.trim();
+        let nameError = document.getElementById("nameError");
+        let emailError = document.getElementById("emailError");
+        let amountError = document.getElementById("amountError");
+
+        // Reset previous error messages
+        nameError.textContent = "";
+        emailError.textContent = "";
+        amountError.textContent = "";
+
+        let valid = true;
+
+        if (!name) {
+          nameError.textContent = "Name is required.";
+          valid = false;
+        }
+
+        if (!email) {
+          emailError.textContent = "Email is required.";
+          valid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+          emailError.textContent = "Enter a valid email address.";
+          valid = false;
+        }
+
+        if (!amount) {
+          amountError.textContent = "Donation amount is required.";
+          valid = false;
+        } else if (isNaN(amount) || parseInt(amount) <= 0) {
+          amountError.textContent =
+            "Enter a valid donation amount (greater than 0).";
+          valid = false;
+        }
+
+        if (valid) {
+          document.getElementById("paymentModal").classList.remove("hidden");
+        }
       }
 
       function closePaymentModal() {
