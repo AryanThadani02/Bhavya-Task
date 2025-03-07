@@ -4,162 +4,233 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blockchain Crowdfunding</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #121212;
-        color: white;
-        text-align: center;
-      }
-      .container {
-        max-width: 800px;
-        margin: 50px auto;
-        padding: 20px;
-        background: #1e1e1e;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-      }
-      h1 {
-        color: #ffd700;
-      }
-      p {
-        color: #ddd;
-        font-size: 18px;
-      }
-      .progress-bar {
-        width: 100%;
-        background: #333;
-        border-radius: 5px;
-        margin-top: 20px;
-      }
-      .progress {
-        width: 10%;
-        height: 20px;
-        background: #28a745;
-        border-radius: 5px;
-        transition: width 0.5s ease-in-out;
-      }
-      input,
-      button {
-        margin-top: 15px;
-        padding: 10px;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-      }
-      input {
-        width: 70%;
-      }
-      button {
-        background: #007bff;
-        color: white;
-        cursor: pointer;
-        transition: background 0.3s ease-in-out;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-      .leaderboard {
-        margin-top: 30px;
-        padding: 15px;
-        background: #222;
-        border-radius: 10px;
-        text-align: left;
-      }
-      .leaderboard h3 {
-        color: #ffd700;
-      }
-      .nft-badge {
-        margin-top: 20px;
-        padding: 15px;
-        background: #222;
-        border-radius: 10px;
-        display: none;
-      }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="container">
-      <h1>Join the Future of Banking 🚀</h1>
-      <p>
+  <body class="bg-gray-900 text-white text-center">
+    <div class="max-w-2xl mx-auto mt-12 p-6 bg-gray-800 shadow-lg rounded-lg">
+      <h1 class="text-3xl font-bold text-yellow-400">
+        Join the Future of Banking 🚀
+      </h1>
+      <p class="mt-4 text-gray-300">
         We are revolutionizing domestic bank transactions with blockchain
         technology. Be part of the movement to create a faster, cheaper, and
         more secure financial system.
       </p>
 
-      <h3>🔥 Funding Progress 🔥</h3>
-      <div class="progress-bar">
-        <div class="progress" id="progress"></div>
+      <h3 class="mt-6 text-xl font-semibold text-green-400">
+        🔥 Funding Progress 🔥
+      </h3>
+      <div class="flex justify-between text-sm font-semibold text-gray-400">
+        <span>$0</span>
+        <span>$10,000</span>
       </div>
-      <p id="funding-status">
-        <strong>10% funded</strong> – Help us reach our goal!
+      <div class="w-full bg-gray-700 rounded-lg mt-2 h-5 relative">
+        <div
+          id="progress"
+          class="h-5 bg-green-500 rounded-lg"
+          style="width: 10%"
+        ></div>
+      </div>
+      <p id="funding-status" class="mt-2 font-semibold">
+        <strong>$1,000 raised</strong> – Help us reach our goal!
       </p>
 
-      <h3>💰 Make a Fictitious Donation 💰</h3>
-      <input type="text" id="donorName" placeholder="Your Name" />
-      <input
-        type="number"
-        id="donationAmount"
-        placeholder="Enter amount (fake money)"
-      />
-      <button onclick="makeDonation()">Donate</button>
+      <h3 class="mt-6 text-xl font-semibold text-blue-400">
+        💰 Make a Fictitious Donation 💰
+      </h3>
+      <form id="donationForm" class="mt-4">
+        <input
+          type="text"
+          id="donorName"
+          placeholder="Your Name"
+          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+        />
+        <input
+          type="email"
+          id="donorEmail"
+          placeholder="Your Email"
+          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+        />
+        <input
+          type="number"
+          id="donationAmount"
+          placeholder="Enter amount (fake money)"
+          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+          min="1"
+        />
+        <button
+          type="button"
+          onclick="openPaymentModal()"
+          class="mt-4 px-6 py-2 bg-blue-500 hover:bg-blue-700 rounded text-white"
+        >
+          Donate
+        </button>
+      </form>
+    </div>
 
-      <div class="leaderboard">
-        <h3>🏆 Live Leaderboard 🏆</h3>
-        <ol id="leaderboard-list"></ol>
-      </div>
-
-      <div class="nft-badge" id="nftBadge">
-        <h3>🎖 Your Exclusive Supporter NFT 🎖</h3>
-        <img src="https://via.placeholder.com/150" alt="NFT Badge" />
-        <p>
-          Thank you for supporting our vision! This NFT is your digital proof of
-          backing the future of banking.
-        </p>
+    <!-- Payment Modal -->
+    <div
+      id="paymentModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+    >
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96 text-center">
+        <h2 class="text-xl font-bold text-yellow-400">Enter Payment Details</h2>
+        <input
+          type="text"
+          id="cardNumber"
+          placeholder="Card Number"
+          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+          minlength="16"
+          maxlength="16"
+        />
+        <input
+          type="text"
+          id="expiryDate"
+          placeholder="MM/YY"
+          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+          pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$"
+        />
+        <input
+          type="text"
+          id="cvv"
+          placeholder="CVV"
+          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          required
+          minlength="3"
+          maxlength="3"
+        />
+        <div class="flex justify-between mt-4">
+          <button
+            onclick="closePaymentModal()"
+            class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-white"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="processDonation()"
+            class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded text-white"
+          >
+            Confirm Payment
+          </button>
+        </div>
       </div>
     </div>
 
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+    >
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96 text-center">
+        <div class="flex justify-center">
+          <svg
+            class="w-16 h-16 text-green-400 animate-bounce"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-green-400 mt-4">
+          Donation Successful!
+        </h2>
+        <p class="text-gray-300 mt-2">Thank you for your support!</p>
+        <button
+          onclick="closeSuccessModal()"
+          class="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div
+      id="leaderboard"
+      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-gray-700 rounded-lg text-left"
+    >
+      <h3 class="text-yellow-400 text-lg font-semibold">
+        🏆 Live Leaderboard 🏆
+      </h3>
+      <ol id="leaderboard-list" class="mt-2 list-decimal pl-6"></ol>
+    </div>
+
+    <!-- NFT Badge -->
+    <div
+      id="nftBadge"
+      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-gray-700 rounded-lg"
+    >
+      <h3 class="text-lg font-semibold text-purple-400">
+        🎖 Your Exclusive Supporter NFT 🎖
+      </h3>
+      <img
+        src="https://cdn.dribbble.com/userupload/33915498/file/original-f12b9ce2a7b9905416b64879ad7c41c9.png?format=webp&resize=400x300&vertical=center"
+        alt="NFT Badge"
+        class="mt-3 mx-auto rounded-lg"
+      />
+      <p class="mt-2 text-gray-300">
+        Thank you for supporting our vision! This NFT is your digital proof of
+        backing the future of banking.
+      </p>
+    </div>
+
     <script>
-      let totalFunds = 10; // Default progress at 10%
+      let totalFunds = 1000;
+      const goalAmount = 10000;
       let leaderboard = [];
 
-      function makeDonation() {
+      function openPaymentModal() {
+        document.getElementById("paymentModal").classList.remove("hidden");
+      }
+
+      function closePaymentModal() {
+        document.getElementById("paymentModal").classList.add("hidden");
+      }
+
+      function processDonation() {
+        document.getElementById("paymentModal").classList.add("hidden");
+        document.getElementById("successModal").classList.remove("hidden");
+
         let name = document.getElementById("donorName").value;
-        let amount = document.getElementById("donationAmount").value;
+        let email = document.getElementById("donorEmail").value;
+        let amount = parseInt(document.getElementById("donationAmount").value);
 
-        if (name.trim() !== "" && amount > 0) {
-          totalFunds += parseInt(amount) / 100; // Fake scaling
-          if (totalFunds > 100) totalFunds = 100; // Cap at 100%
-          document.getElementById("progress").style.width = totalFunds + "%";
-          document.getElementById("funding-status").innerHTML =
-            "<strong>" +
-            Math.round(totalFunds) +
-            "% funded</strong> – Thank you for your support!";
+        totalFunds += amount;
+        document.getElementById("progress").style.width =
+          (totalFunds / goalAmount) * 100 + "%";
+        document.getElementById(
+          "funding-status"
+        ).innerHTML = `<strong>$${totalFunds.toLocaleString()} raised</strong> – Thank you for your support!`;
 
-          leaderboard.push({ name: name, amount: amount });
-          leaderboard.sort((a, b) => b.amount - a.amount);
+        leaderboard.push({ name, email, amount });
+        leaderboard.sort((a, b) => b.amount - a.amount);
 
-          updateLeaderboard();
-
-          if (!document.getElementById("nftBadge").style.display) {
-            document.getElementById("nftBadge").style.display = "block";
-          }
-        }
+        updateLeaderboard();
+        document.getElementById("leaderboard").classList.remove("hidden");
+        document.getElementById("nftBadge").classList.remove("hidden");
       }
 
       function updateLeaderboard() {
         let list = document.getElementById("leaderboard-list");
         list.innerHTML = "";
-        leaderboard.slice(0, 5).forEach((donor) => {
-          let listItem = document.createElement("li");
-          listItem.innerHTML = <strong>${donor.name}</strong>;
-          {
-            donor.amount;
-          }
-          list.appendChild(listItem);
+        leaderboard.forEach((donor) => {
+          list.innerHTML += `<li><strong>${donor.name}</strong> (${donor.email}): $${donor.amount}</li>`;
         });
+      }
+
+      function closeSuccessModal() {
+        document.getElementById("successModal").classList.add("hidden");
       }
     </script>
   </body>
