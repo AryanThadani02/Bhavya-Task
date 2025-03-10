@@ -6,45 +6,45 @@
     <title>Carrybie- Child care services</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-900 text-white text-center">
-    <div class="max-w-2xl mx-auto mt-12 p-6 bg-gray-800 shadow-lg rounded-lg">
-      <h1 class="lg:text-3xl text-xl font-bold text-yellow-400">
-        Help Us Build Canada's First Combined In-Home Childcare & Cleaning
-        Service. 🚀
+  <body class="bg-pink-200 text-gray-800 text-center">
+    <div class="max-w-2xl mx-auto mt-12 p-6 bg-pink-200 shadow-lg rounded-lg">
+      <h1 class="lg:text-3xl text-xl font-bold text-pink-600">
+        🧸 Help Us Build Canada's First Combined In-Home Childcare & Cleaning
+        Service! 🚀
       </h1>
-      <p class="mt-4 text-gray-300">
-        We're Carrybie—designed for parents who never stop. Your donation will
-        help us launch faster, so families can get trusted care & clean homes
-        on-demand.
+      <p class="mt-4 text-gray-700">
+        We're Carrybie—designed for busy parents! 👨‍👩‍👧‍👦 Your donation helps us
+        launch faster, so families can get trusted care & sparkly clean homes
+        on-demand. ✨🏠
       </p>
 
-      <h3 class="mt-6 text-xl font-semibold text-green-400">
-        🔥 Funding Progress 🔥
+      <h3 class="mt-6 text-xl font-semibold text-pink-500">
+        🔥 Our Magical Progress Bar! 🎉
       </h3>
-      <div class="flex justify-between text-sm font-semibold text-gray-400">
+      <div class="flex justify-between text-sm font-semibold text-gray-600">
         <span>$0</span>
         <span>$10,000</span>
       </div>
-      <div class="w-full bg-gray-700 rounded-lg mt-2 h-5 relative">
+      <div class="w-full bg-pink-300 rounded-lg mt-2 h-5 relative">
         <div
           id="progress"
-          class="h-5 bg-green-500 rounded-lg"
+          class="h-5 bg-pink-500 rounded-lg"
           style="width: 10%"
         ></div>
       </div>
       <p id="funding-status" class="mt-2 font-semibold">
-        <strong>$1,000 raised</strong> – Help us reach our goal!
+        <strong>$1,000 raised</strong> – You are awesome! 🌟
       </p>
 
-      <h3 class="mt-6 text-xl font-semibold text-blue-400">
-        💰 Make a Fictitious Donation 💰
+      <h3 class="mt-6 text-xl font-semibold text-pink-600">
+        💖 Make a Magical Donation 💖
       </h3>
       <form id="donationForm" class="mt-4">
         <input
           type="text"
           id="donorName"
-          placeholder="Your Name"
-          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="🧒 Your Name"
+          class="w-3/4 p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
         />
         <p id="nameError" class="text-red-500 text-sm mt-1"></p>
@@ -52,8 +52,8 @@
         <input
           type="email"
           id="donorEmail"
-          placeholder="Your Email"
-          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="📧 Your Email"
+          class="w-3/4 p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
         />
         <p id="emailError" class="text-red-500 text-sm mt-1"></p>
@@ -61,8 +61,8 @@
         <input
           type="number"
           id="donationAmount"
-          placeholder="Enter amount (fake money)"
-          class="w-3/4 p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="💵 Enter amount (make-believe money!)"
+          class="w-3/4 p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
           min="1"
         />
@@ -70,9 +70,9 @@
         <button
           type="button"
           onclick="openPaymentModal()"
-          class="mt-4 px-6 py-2 bg-blue-500 hover:bg-blue-700 rounded text-white"
+          class="mt-4 px-6 py-2 bg-pink-500 hover:bg-pink-600 rounded text-white"
         >
-          Donate
+          🎁 Donate Now!
         </button>
       </form>
     </div>
@@ -82,13 +82,15 @@
       id="paymentModal"
       class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
     >
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96 text-center">
-        <h2 class="text-xl font-bold text-yellow-400">Enter Payment Details</h2>
+      <div class="bg-pink-200 p-6 rounded-lg shadow-lg w-96 text-center">
+        <h2 class="text-xl font-bold text-pink-600">
+          💳 Enter Payment Details
+        </h2>
         <input
           type="text"
           id="cardNumber"
-          placeholder="Card Number"
-          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="💳 Card Number"
+          class="w-full p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
           minlength="16"
           maxlength="16"
@@ -96,16 +98,16 @@
         <input
           type="text"
           id="expiryDate"
-          placeholder="MM/YY"
-          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="📅 MM/YY"
+          class="w-full p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
           pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$"
         />
         <input
           type="text"
           id="cvv"
-          placeholder="CVV"
-          class="w-full p-2 mt-3 rounded bg-gray-700 text-white"
+          placeholder="🔒 CVV"
+          class="w-full p-2 mt-3 rounded bg-pink-300 text-gray-800"
           required
           minlength="3"
           maxlength="3"
@@ -113,15 +115,15 @@
         <div class="flex justify-between mt-4">
           <button
             onclick="closePaymentModal()"
-            class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-white"
+            class="px-4 py-2 bg-gray-400 hover:bg-gray-500 rounded text-white"
           >
-            Cancel
+            ❌ Cancel
           </button>
           <button
             onclick="processDonation()"
-            class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded text-white"
+            class="px-4 py-2 bg-pink-500 hover:bg-pink-600 rounded text-white"
           >
-            Confirm Payment
+            ✅ Confirm!
           </button>
         </div>
       </div>
@@ -132,7 +134,7 @@
       id="successModal"
       class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
     >
-      <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-96 text-center">
+      <div class="bg-pink-200 p-6 rounded-lg shadow-lg w-96 text-center">
         <div class="flex justify-center">
           <svg
             class="w-16 h-16 text-green-400 animate-bounce"
@@ -148,15 +150,15 @@
             ></path>
           </svg>
         </div>
-        <h2 class="text-xl font-bold text-green-400 mt-4">
-          Donation Successful!
+        <h2 class="text-xl font-bold text-green-500 mt-4">
+          🎉 Donation Successful! 🎉
         </h2>
-        <p class="text-gray-300 mt-2">Thank you for your support!</p>
+        <p class="text-gray-700 mt-2">Thank you for being amazing! 🌈</p>
         <button
           onclick="closeSuccessModal()"
-          class="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white"
+          class="mt-4 px-4 py-2 bg-pink-500 hover:bg-pink-600 rounded text-white"
         >
-          OK
+          💖 OK!
         </button>
       </div>
     </div>
@@ -164,10 +166,10 @@
     <!-- Leaderboard -->
     <div
       id="leaderboard"
-      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-gray-700 rounded-lg text-left"
+      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-pink-200 rounded-lg text-left"
     >
-      <h3 class="text-yellow-400 text-lg font-semibold">
-        🏆 Live Leaderboard 🏆
+      <h3 class="text-pink-600 text-lg font-semibold">
+        🏆 Super Donors Leaderboard! 🌟
       </h3>
       <ol id="leaderboard-list" class="mt-2 list-decimal pl-6"></ol>
     </div>
@@ -175,19 +177,18 @@
     <!-- NFT Badge -->
     <div
       id="nftBadge"
-      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-gray-700 rounded-lg"
+      class="hidden max-w-2xl mx-auto mt-6 p-4 bg-pink-200 rounded-lg"
     >
-      <h3 class="text-lg font-semibold text-purple-400">
-        🎖 Your Exclusive Supporter NFT 🎖
+      <h3 class="text-lg font-semibold text-pink-600">
+        🎖 Your Special Supporter NFT! 🎖
       </h3>
       <img
         src="https://cdn.dribbble.com/userupload/33915498/file/original-f12b9ce2a7b9905416b64879ad7c41c9.png?format=webp&resize=400x300&vertical=center"
         alt="NFT Badge"
         class="mt-3 mx-auto rounded-lg"
       />
-      <p class="mt-2 text-gray-300">
-        Thank you for supporting our vision! This NFT is your digital proof of
-        backing the future of banking.
+      <p class="mt-2 text-gray-700">
+        Thanks for being our hero! 🦸‍♂️🦸‍♀️ This NFT is your magical badge! 🌟
       </p>
     </div>
 
